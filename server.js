@@ -11,14 +11,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // PostgreSQL Connection 
-const pool = new Pool({
-  host: 'localhost',
-  port: 1409,
-  database: 'production',
-  user: 'postgres',
-  password: 'admin',
-  ssl: false
-});
+const pool = new Pool(
+  process.env.DATABASE_URL
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
+      }
+    : {
+        host: 'localhost',
+        port: 1409,
+        database: 'production',
+        user: 'postgres',
+        password: 'admin',
+        ssl: false
+      }
+);
 
 // Init DB Table 
 async function initDB() {
