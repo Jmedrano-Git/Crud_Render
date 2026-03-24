@@ -34,7 +34,7 @@ async function initDB() {
   console.log('✅ Tabla usuarios lista');
 }
 
-// API Routes: CRUD Usuarios
+// CRUD Usuarios
 
 // GET all usuarios
 app.get('/api/usuarios', async (req, res) => {
